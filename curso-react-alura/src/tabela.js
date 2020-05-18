@@ -15,11 +15,11 @@ const TableHead = () =>{
 const TableBody =  props =>{
     const linhas = props.autores.map((linha, index) => {
         return (
-            <tr>
+            <tr key={index}>
                 <td>{linha.nome}</td>
                 <td>{linha.livro}</td>
                 <td>{linha.preco}</td>
-                <td><button>Remover</button></td>
+                <td><button onClick = { () => {props.removeAutor(index)}} className = "waves-effect waves-light indigo lighten-2 btn">Remover</button></td>
             </tr>
         );
     });
@@ -36,10 +36,12 @@ class tabela extends Component {
 
     render() {
 
-        const { autores } = this.props;
-        return (<table>
-            <TableHead></TableHead>          
-            <TableBody autores = {autores}></TableBody>
+        const { autores,removeAutor } = this.props;
+
+        return (
+        <table className = "centered highlight">
+            <TableHead/>        
+            <TableBody autores = {autores} removeAutor = {removeAutor}/>
           </table>)
     }
 
